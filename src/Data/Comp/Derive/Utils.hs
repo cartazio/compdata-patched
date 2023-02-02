@@ -34,6 +34,11 @@ data DataInfo = DataInfo Cxt Name [THCompat.UnitTyVarBndr] [Con] [Name]
 data DataInfo = DataInfo Cxt Name [THCompat.UnitTyVarBndr] [Con] Cxt
 #else
 data DataInfo = DataInfo Cxt Name [THCompat.UnitTyVarBndr] [Con] [DerivClause] 
+#if __GLASGOW_HASKELL__ < 900
+data DataInfo = DataInfo Cxt Name [TyVarBndr] [Con] [DerivClause] 
+#else
+data DataInfo = DataInfo Cxt Name [TyVarBndr ()] [Con] [DerivClause] 
+#endif
 #endif
 #endif
 
